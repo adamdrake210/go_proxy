@@ -24,8 +24,10 @@ func (h *Handler) handleConnect(w http.ResponseWriter, r *http.Request) {
 	captured.Host = r.Host
 	captured.URL = "https://" + r.Host
 	captured.Path = ""
+	captured.Proto = r.Proto
 	captured.IsHTTPS = true
 	captured.IsTunnel = true
+	captured.ClientAddr = r.RemoteAddr
 	captured.RequestHeaders = cloneHeaders(r.Header)
 
 	// Parse host and port

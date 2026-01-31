@@ -63,8 +63,10 @@ func (h *Handler) handleHTTP(w http.ResponseWriter, r *http.Request) {
 	captured.ID = uuid.New().String()
 	captured.Method = r.Method
 	captured.Host = r.Host
+	captured.Proto = r.Proto
 	captured.IsHTTPS = false
 	captured.IsTunnel = false
+	captured.ClientAddr = r.RemoteAddr
 
 	// Build the target URL
 	targetURL := h.buildTargetURL(r)

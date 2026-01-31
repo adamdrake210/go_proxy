@@ -7,14 +7,15 @@ import (
 
 // CapturedRequest represents a captured HTTP request and its response
 type CapturedRequest struct {
-	ID              string              `json:"id"`
-	Timestamp       time.Time           `json:"timestamp"`
-	Method          string              `json:"method"`
-	URL             string              `json:"url"`
-	Host            string              `json:"host"`
-	Path            string              `json:"path"`
-	RequestHeaders  map[string][]string `json:"request_headers"`
-	RequestBody     []byte              `json:"request_body,omitempty"`
+	ID             string              `json:"id"`
+	Timestamp      time.Time           `json:"timestamp"`
+	Method         string              `json:"method"`
+	URL            string              `json:"url"`
+	Host           string              `json:"host"`
+	Path           string              `json:"path"`
+	Proto          string              `json:"proto"`
+	RequestHeaders map[string][]string `json:"request_headers"`
+	RequestBody    []byte              `json:"request_body,omitempty"`
 
 	// Response (filled in after)
 	StatusCode      int                 `json:"status_code"`
@@ -29,6 +30,9 @@ type CapturedRequest struct {
 
 	// For HTTPS CONNECT tunneling, we only see metadata
 	IsTunnel bool `json:"is_tunnel"`
+
+	// Client address for process resolution
+	ClientAddr string `json:"client_addr,omitempty"`
 
 	// Process info (for future use)
 	ProcessName string `json:"process_name,omitempty"`
